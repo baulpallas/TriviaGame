@@ -113,16 +113,19 @@ var renderQuestionObj = {
     $(".content").html(
       `<p id="question${QID}" class="question d-flex flex-column col-12">${question}</p> <div class="holder"><div class="choice col-12" id="${ID0}">${choice0}</div> <div class="choice col-12" id="${ID1}">${choice1}</div> <div class="choice col-12" id="${ID2}">${choice2}</div> <div class="choice col-12" id="${ID3}">${choice3}</div></div>`
     );
+    this.newEventListener(0);
+    if (time <= 0) {
+      console.log("DEBUG");
+    }
+  },
 
+  newEventListener: function(question) {
     $(".holder").on("click", ".choice", function() {
       userChoice = $(this).attr("id");
-      if (userChoice === triviaData[0].answer.split(" ").join("-")) {
-        renderQuestionObj.correctAnswer(triviaData[0].answer);
+      if (userChoice === triviaData[question].answer.split(" ").join("-")) {
+        renderQuestionObj.correctAnswer(triviaData[question].answer);
 
         // add function where we move to next screen
-      }
-      if (time <= 0) {
-        console.log("you suck");
       }
     });
   },
