@@ -1,0 +1,32 @@
+body {
+  margin: 0px;
+  background-image: url("../images/retro_Color_Palett.jpg");
+}
+
+#title {
+  /* padding: 10px 0px 130px 10px; */
+  text-align: center;
+  font-family: "Monoton", cursive;
+  background-color: #ffc907;
+}
+
+.main {
+  width: 100%;
+  background-color: white;
+  opacity: 0.9;
+}
+.content {
+  padding-top: 20px;
+  padding-bottom: 50px;
+}
+#timer {
+  width: 100%;
+}
+
+.startButton {
+  text-align: center;
+  width: 15%;
+  align: center;
+  margin-bottom: 30px;
+  border: black solid 1px;
+}
