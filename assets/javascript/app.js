@@ -42,7 +42,6 @@ var triviaData = [
   }
 ];
 var userChoice;
-var clockRunning = false;
 var timeVariable;
 var changeScreenTimeVariable;
 var time = 20;
@@ -51,10 +50,9 @@ var correctGuesses = 0;
 window.onload = function() {
   $(".startButton").on("click", startGame);
 };
+
 // start game function
 function startGame() {
-  console.log("did it work?");
-  clockRunning = true;
   console.log(timeVariable);
   var html = triviaData[0];
   renderQuestionObj.renderQuestion(
@@ -70,6 +68,8 @@ function startGame() {
     html.choices[3]
   );
 }
+
+var timeVariable;
 
 var renderQuestionObj = {
   renderQuestion: function(
@@ -89,16 +89,15 @@ var renderQuestionObj = {
     );
     this.newEventListener(0);
     var time = 20;
-    var timeVariable;
     var stopClockText = `Time Remaining: ${time}`;
     $("#timer").text(stopClockText);
     timeVariable = setInterval(function() {
       time--;
       var textStopClock = `Time Remaining: ${time}`;
       $("#timer").text(textStopClock);
-      console.log(time);
       if (time < 1) {
-        clearInterval(time);
+        clearInterval(timeVariable);
+        console.log(time);
         renderQuestionObj.wrongAnswer();
       }
     }, 1000);
@@ -112,6 +111,7 @@ var renderQuestionObj = {
 
         // add function where we move to next screen
       } else {
+        time;
         renderQuestionObj.wrongAnswer(triviaData[question].answer);
       }
     });
@@ -122,14 +122,14 @@ var renderQuestionObj = {
     );
     $(".startButton").text("Next Question!");
     $("#timer").text("");
+    clearInterval(timeVariable);
     correctGuesses++;
-    console.log(time);
-    console.log(correctGuesses);
   },
   wrongAnswer: function(answer) {
     $(".content").html(
       `<p>PAUL BUFANO! COME ON! JEEZ! The correct answer was ${answer}!</p>`
     );
+    $("#timer").text("");
     $(".startButton").text("Next Question!");
   }
 };
