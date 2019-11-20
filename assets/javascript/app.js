@@ -55,38 +55,21 @@ window.onload = function() {
 function startGame() {
   console.log(timeVariable);
   var html = triviaData[0];
-  renderQuestionObj.renderQuestion(
-    html.id,
-    html.question,
-    html.choices[0].split(" ").join("-"),
-    html.choices[1].split(" ").join("-"),
-    html.choices[2].split(" ").join("-"),
-    html.choices[3].split(" ").join("-"),
-    html.choices[0],
-    html.choices[1],
-    html.choices[2],
-    html.choices[3]
-  );
+  renderQuestionObj.renderQuestion(0);
 }
 
-var timeVariable;
-
 var renderQuestionObj = {
-  renderQuestion: function(
-    QID,
-    question,
-    ID0,
-    ID1,
-    ID2,
-    ID3,
-    choice0,
-    choice1,
-    choice2,
-    choice3
-  ) {
+  renderQuestion: function(questionNum) {
     $(".content").html(
-      `<p id="question${QID}" class="question d-flex flex-column col-12">${question}</p> <div class="holder"><div class="choice col-12" id="${ID0}">${choice0}</div> <div class="choice col-12" id="${ID1}">${choice1}</div> <div class="choice col-12" id="${ID2}">${choice2}</div> <div class="choice col-12" id="${ID3}">${choice3}</div></div>`
+      `<p id="question${triviaData[questionNum].id}" class="question d-flex flex-column col-12">${triviaData[questionNum].question}</p> <div class="holder"></div>`
     );
+    for (var i = 0; i < triviaData.length; i++) {
+      $(".holder")[0].innerHTML += `<p class="choice col-12" id="${triviaData[
+        questionNum
+      ].choices[i]
+        .split(" ")
+        .join("-")}">${triviaData[questionNum].choices[i]}</p>`;
+    }
     this.newEventListener(0);
     var time = 20;
     var stopClockText = `Time Remaining: ${time}`;
