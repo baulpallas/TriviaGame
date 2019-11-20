@@ -100,13 +100,16 @@ var renderQuestionObj = {
     });
   },
   correctAnswer: function(answer) {
+    clearInterval(timeVariable);
+    correctGuesses++;
     $(".content").html(
       `<p>That's right! ${answer}! How about some gaspacho soup?</p>`
     );
     $(".startButton").text("Next Question!");
     $("#timer").text("");
-    clearInterval(timeVariable);
-    correctGuesses++;
+    setTimeout(function() {
+      renderQuestionObj.renderQuestion(1);
+    }, 4000);
   },
   wrongAnswer: function(answer) {
     $(".content").html(
@@ -114,5 +117,8 @@ var renderQuestionObj = {
     );
     $("#timer").text("");
     $(".startButton").text("Next Question!");
+    setTimeout(function() {
+      renderQuestionObj.renderQuestion(1);
+    });
   }
 };
