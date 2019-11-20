@@ -9,6 +9,10 @@
       href="https://fonts.googleapis.com/css?family=Monoton&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css?family=Contrail+One&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="assets/css/style.css" />
     <link
       rel="stylesheet"
@@ -18,20 +22,41 @@
     />
   </head>
   <body>
-    <header>
-      <h1 id="title" class="header p-3">Jazz Trivia</h1>
-    </header>
+    <div class="col-12 header d-flex justify-content-center">
+      <div class="row">
+        <img
+          src="assets/images/45_adapter_old-removebg-preview.png"
+          alt=""
+          class="adapter"
+        />
+        <h1 id="title" class="p-3">Jazz Trivia</h1>
+        <img
+          src="assets/images/45_adapter_old-removebg-preview.png"
+          alt=""
+          class="adapter"
+        />
+      </div>
+    </div>
+
     <br />
 
-    <div class="d-flex justify-content-center">
+    <div class="page d-flex justify-content-center">
       <div class="col-2"></div>
-      <div class="col-8 main card flex-column">
+      <div class="col-8 main card flex-column d-flex align-items-center">
         <div class="row">
           <div class="col-12"><p id="timer"></p></div>
         </div>
         <div class="row">
-          <div class="content h-100 col-12"></div>
+          <div class="content h-100 col-12">
+            It's Jazz trivia. Let's see if you have what it takes to run with
+            some of greatest cats that ever played like Marcus the Worm Hicks
+            and Roy Donk. Click the start-button to get this record rollin'.
+          </div>
         </div>
+        <div class="row">
+          <img src="assets/images/paulBufano.jpg" class="paulBufano" />
+        </div>
+        <br />
         <div class="row">
           <div class="col-12">
             <button type="button" class="startButton">
@@ -42,8 +67,6 @@
       </div>
       <div class="col-2"></div>
     </div>
-
-    <h1 id="pageTitle"></h1>
     <script src="assets/javascript/app.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.4.1.js"

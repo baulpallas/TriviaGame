@@ -2,7 +2,7 @@ var triviaData = [
   {
     id: 0,
     question:
-      'They call him "Freak lips". He can hit the high c all night long.  He\'s known as King of the Tuk Tuk sound.',
+      'They call him "Freak lips". He can hit the High C all night long! He\'s also known as King of the Tuk Tuk sound.',
     choices: [
       "Roy Donk",
       "Tiny Boop Sqig Shorterly",
@@ -43,9 +43,9 @@ var triviaData = [
 ];
 var userChoice;
 var timeVariable;
-var changeScreenTimeVariable;
 var time = 20;
 var correctGuesses = 0;
+var triviaStatus = 0;
 
 window.onload = function() {
   $(".startButton").on("click", startGame);
@@ -53,13 +53,13 @@ window.onload = function() {
 
 // start game function
 function startGame() {
-  console.log(timeVariable);
-  var html = triviaData[0];
-  renderQuestionObj.renderQuestion(0);
+  renderQuestionObj.renderQuestion(triviaStatus);
 }
 
 var renderQuestionObj = {
   renderQuestion: function(questionNum) {
+    $(".paulBufano").remove();
+    $(".startButton").remove();
     $(".content").html(
       `<p id="question${triviaData[questionNum].id}" class="question d-flex flex-column col-12">${triviaData[questionNum].question}</p> <div class="holder"></div>`
     );
@@ -70,7 +70,7 @@ var renderQuestionObj = {
         .split(" ")
         .join("-")}">${triviaData[questionNum].choices[i]}</p>`;
     }
-    this.newEventListener(0);
+    this.newEventListener(triviaStatus);
     var time = 20;
     var stopClockText = `Time Remaining: ${time}`;
     $("#timer").text(stopClockText);
@@ -100,25 +100,31 @@ var renderQuestionObj = {
     });
   },
   correctAnswer: function(answer) {
+    // debugger;
     clearInterval(timeVariable);
+    triviaStatus++;
     correctGuesses++;
     $(".content").html(
       `<p>That's right! ${answer}! How about some gaspacho soup?</p>`
     );
     $(".startButton").text("Next Question!");
+
     $("#timer").text("");
     setTimeout(function() {
-      renderQuestionObj.renderQuestion(1);
+      renderQuestionObj.renderQuestion(triviaStatus);
     }, 4000);
   },
   wrongAnswer: function(answer) {
+    clearInterval(timeVariable);
+    // debugger;
+    triviaStatus++;
     $(".content").html(
-      `<p>PAUL BUFANO! COME ON! JEEZ! The correct answer was ${answer}!</p>`
+      `<p>It's ${answer}! COME ON! GEEZ! Your record collection must be very meat and potatoes!</p>`
     );
     $("#timer").text("");
     $(".startButton").text("Next Question!");
     setTimeout(function() {
-      renderQuestionObj.renderQuestion(1);
-    });
+      renderQuestionObj.renderQuestion(triviaStatus);
+    }, 4000);
   }
 };
