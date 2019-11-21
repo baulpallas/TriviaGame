@@ -80,7 +80,6 @@ var renderQuestionObj = {
       $("#timer").text(textStopClock);
       if (time < 1) {
         clearInterval(timeVariable);
-        console.log(time);
         renderQuestionObj.wrongAnswer();
       }
     }, 1000);
@@ -105,27 +104,46 @@ var renderQuestionObj = {
     triviaStatus++;
     correctGuesses++;
     $(".content").html(
-      `<p>That's right! ${answer}! How about some gaspacho soup?</p>`
+      `<p>That's right! ${answer}! I see you've been watching Colgate Comedy Hour.  How about some gaspacho soup?</p><img src="assets/images/colgate.jpg" id="colgate">`
     );
-    $(".startButton").text("Next Question!");
-
     $("#timer").text("");
-    setTimeout(function() {
-      renderQuestionObj.renderQuestion(triviaStatus);
-    }, 4000);
+    if (triviaStatus !== triviaData.length) {
+      setTimeout(function() {
+        renderQuestionObj.renderQuestion(triviaStatus);
+      }, 4000);
+    } else if (triviaStatus === triviaData.length) {
+      setTimeout(function() {
+        renderQuestionObj.gameOver();
+      }, 4000);
+    }
   },
   wrongAnswer: function(answer) {
     clearInterval(timeVariable);
     // debugger;
     triviaStatus++;
     $(".content").html(
-      `<p>It's ${answer}! COME ON! GEEZ! Your record collection must be very meat and potatoes...</p>`
+      `<p>It's ${answer}! COME ON! GEEZ! Your record collection must be very meat and potatoes...</p><img src="assets/images/donk.jpg" id="royDonk">`
     );
     $("#timer").text("");
-    $(".startButton").text("Next Question!");
-    setTimeout(function() {
-      renderQuestionObj.renderQuestion(triviaStatus);
-    }, 4000);
+    if (triviaStatus !== triviaData.length) {
+      setTimeout(function() {
+        renderQuestionObj.renderQuestion(triviaStatus);
+      }, 4000);
+    } else if (triviaStatus === triviaData.length) {
+      setTimeout(function() {
+        renderQuestionObj.gameOver();
+      }, 4000);
+    }
   },
-  gameOver: function() {}
+  gameOver: function() {
+    $(".content").html(
+      `<p>Play again?</p><img src="assets/images/donk.jpg" id="royDonk">`
+    );
+    $(".buttonContainer").html(`<button type="button" class="startButton">
+    Click to Play Again!
+  </button>`);
+    $(".buttonContainer").on("click", ".startButton", function() {
+      $(".content").html("");
+    });
+  }
 };
