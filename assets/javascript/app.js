@@ -81,7 +81,7 @@ var renderQuestionObj = {
       $("#timer").text(textStopClock);
       if (time < 1) {
         clearInterval(timeVariable);
-        renderQuestionObj.wrongAnswer();
+        renderQuestionObj.outOfTime();
       }
     }, 1000);
   },
@@ -110,11 +110,11 @@ var renderQuestionObj = {
     if (triviaStatus !== triviaData.length) {
       setTimeout(function() {
         renderQuestionObj.renderQuestion(triviaStatus);
-      }, 4000);
+      }, 5000);
     } else if (triviaStatus === triviaData.length) {
       setTimeout(function() {
         renderQuestionObj.gameOver();
-      }, 4000);
+      }, 3000);
     }
   },
   wrongAnswer: function(answer) {
@@ -128,16 +128,33 @@ var renderQuestionObj = {
     if (triviaStatus !== triviaData.length) {
       setTimeout(function() {
         renderQuestionObj.renderQuestion(triviaStatus);
-      }, 4000);
+      }, 5000);
     } else if (triviaStatus === triviaData.length) {
       setTimeout(function() {
         renderQuestionObj.gameOver();
-      }, 4000);
+      }, 3000);
+    }
+  },
+  outOfTime: function() {
+    clearInterval(timeVariable);
+    triviaStatus++;
+    incorrectGuesses++;
+    $(".content").html(
+      `<p>Out of Time. COME ON! GEEZ! Your record collection must be very meat and potatoes...</p><img src="assets/images/donk.jpg" id="royDonk">`
+    );
+    $("#timer").text("");
+    if (triviaStatus !== triviaData.length) {
+      setTimeout(function() {
+        renderQuestionObj.renderQuestion(triviaStatus);
+      }, 5000);
+    } else if (triviaStatus === triviaData.length) {
+      setTimeout(function() {
+        renderQuestionObj.gameOver();
+      }, 3000);
     }
   },
   gameOver: function() {
     triviaStatus = 0;
-
     $(".content").html(
       `<p>You hit ${correctGuesses} high C's but flubbed ${incorrectGuesses} household names.  Play again? Grab your horn and press the button below!</p><img src="assets/images/donk.jpg" id="royDonk">`
     );
