@@ -119,12 +119,13 @@ var renderQuestionObj = {
     // debugger;
     triviaStatus++;
     $(".content").html(
-      `<p>It's ${answer}! COME ON! GEEZ! Your record collection must be very meat and potatoes!</p>`
+      `<p>It's ${answer}! COME ON! GEEZ! Your record collection must be very meat and potatoes...</p>`
     );
     $("#timer").text("");
     $(".startButton").text("Next Question!");
     setTimeout(function() {
       renderQuestionObj.renderQuestion(triviaStatus);
     }, 4000);
-  }
+  },
+  gameOver: function() {}
 };
