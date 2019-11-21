@@ -45,6 +45,7 @@ var userChoice;
 var timeVariable;
 var time = 20;
 var correctGuesses = 0;
+var incorrectGuesses = 0;
 var triviaStatus = 0;
 
 window.onload = function() {
@@ -99,7 +100,6 @@ var renderQuestionObj = {
     });
   },
   correctAnswer: function(answer) {
-    // debugger;
     clearInterval(timeVariable);
     triviaStatus++;
     correctGuesses++;
@@ -119,8 +119,8 @@ var renderQuestionObj = {
   },
   wrongAnswer: function(answer) {
     clearInterval(timeVariable);
-    // debugger;
     triviaStatus++;
+    incorrectGuesses++;
     $(".content").html(
       `<p>It's ${answer}! COME ON! GEEZ! Your record collection must be very meat and potatoes...</p><img src="assets/images/donk.jpg" id="royDonk">`
     );
@@ -136,14 +136,19 @@ var renderQuestionObj = {
     }
   },
   gameOver: function() {
+    triviaStatus = 0;
+
     $(".content").html(
-      `<p>Play again?</p><img src="assets/images/donk.jpg" id="royDonk">`
+      `<p>You hit ${correctGuesses} high C's but flubbed ${incorrectGuesses} household names.  Play again? Grab your horn and press the button below!</p><img src="assets/images/donk.jpg" id="royDonk">`
     );
     $(".buttonContainer").html(`<button type="button" class="startButton">
     Click to Play Again!
   </button>`);
     $(".buttonContainer").on("click", ".startButton", function() {
       $(".content").html("");
+      correctGuesses = 0;
+      incorrectGuesses = 0;
+      renderQuestionObj.renderQuestion(triviaStatus);
     });
   }
 };
