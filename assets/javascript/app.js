@@ -1,3 +1,5 @@
+// Trivia Object
+
 var triviaData = [
   {
     id: 0,
@@ -35,19 +37,23 @@ var triviaData = [
   },
   {
     id: 3,
-    question: "What jazz soloist was known as Yarbird?",
+    question:
+      "This Jazz soloist worked in the same restaurant as Malcom X and Redd Foxx.  He was known Colloquially as Yarbird.",
     choices: ["Thelonius Monk", "Bill Evans", "Charlie Parker", "Stan Getz"],
     answer: "Charlie Parker",
     answerCode: 2
   }
 ];
+
+//Global Variables
+
 var userChoice;
 var timeVariable;
 var time = 20;
 var correctGuesses = 0;
 var incorrectGuesses = 0;
 var triviaStatus = 0;
-
+//Windows on load function
 window.onload = function() {
   $(".startButton").on("click", startGame);
 };
@@ -56,7 +62,7 @@ window.onload = function() {
 function startGame() {
   renderQuestionObj.renderQuestion(triviaStatus);
 }
-
+// function that renders equch question when called
 var renderQuestionObj = {
   renderQuestion: function(questionNum) {
     $(".paulBufano").remove();
@@ -65,7 +71,6 @@ var renderQuestionObj = {
       `<p id="question${triviaData[questionNum].id}" class="question d-flex flex-column col-12">${triviaData[questionNum].question}</p> <div class="holder"></div>`
     );
     for (var i = 0; i < triviaData.length; i++) {
-      debugger;
       $(".holder")[0].innerHTML += `<p class="choice col-12" id="${triviaData[
         questionNum
       ].choices[i]
@@ -86,7 +91,7 @@ var renderQuestionObj = {
       }
     }, 1000);
   },
-
+  // function that adds click event listner to elements
   newEventListener: function(question) {
     $(".holder").on("click", ".choice", function() {
       userChoice = $(this).attr("id");
@@ -98,6 +103,7 @@ var renderQuestionObj = {
       }
     });
   },
+  // correct answer function
   correctAnswer: function(answer) {
     clearInterval(timeVariable);
     triviaStatus++;
@@ -116,6 +122,7 @@ var renderQuestionObj = {
       }, 3000);
     }
   },
+  // wrong answer function
   wrongAnswer: function(answer) {
     clearInterval(timeVariable);
     triviaStatus++;
@@ -134,6 +141,7 @@ var renderQuestionObj = {
       }, 3000);
     }
   },
+  // out of time function determines what happens when time runs out
   outOfTime: function() {
     clearInterval(timeVariable);
     triviaStatus++;
@@ -152,6 +160,8 @@ var renderQuestionObj = {
       }, 3000);
     }
   },
+
+  //gameover function to reset game
   gameOver: function() {
     triviaStatus = 0;
     $(".content").html(
