@@ -35,7 +35,7 @@ var triviaData = [
   },
   {
     id: 3,
-    question: "What jazz soloist was known as Yarbird",
+    question: "What jazz soloist was known as Yarbird?",
     choices: ["Thelonius Monk", "Bill Evans", "Charlie Parker", "Stan Getz"],
     answer: "Charlie Parker",
     answerCode: 2
@@ -65,6 +65,7 @@ var renderQuestionObj = {
       `<p id="question${triviaData[questionNum].id}" class="question d-flex flex-column col-12">${triviaData[questionNum].question}</p> <div class="holder"></div>`
     );
     for (var i = 0; i < triviaData.length; i++) {
+      debugger;
       $(".holder")[0].innerHTML += `<p class="choice col-12" id="${triviaData[
         questionNum
       ].choices[i]
@@ -91,8 +92,6 @@ var renderQuestionObj = {
       userChoice = $(this).attr("id");
       if (userChoice === triviaData[question].answer.split(" ").join("-")) {
         renderQuestionObj.correctAnswer(triviaData[question].answer);
-
-        // add function where we move to next screen
       } else {
         time;
         renderQuestionObj.wrongAnswer(triviaData[question].answer);
